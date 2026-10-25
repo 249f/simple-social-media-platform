@@ -26,7 +26,7 @@
 
 
 <div class="nav-btn-holder">
-  <button onclick="turnon()">Login</button>
+  <button onclick="turnon('login-popup-all')">Login</button>
   <button>Register</button>
 </div>
 </div>
@@ -75,13 +75,13 @@
 <!-- //posts holder -->
 
 <!-- modals -->
- <div class="login-wrapper hidden" id="login-popup">
+ <div class="login-wrapper hidden" id="login-popup-all">
  <div class="login-popup">
   <h1>Welcome Back</h1>
   <input type="text" placeholder="email">
   <input type="password" placeholder="password">
   <button id="login-btn">Login</button>
-  <button onclick="turnoff()">Cancel</button>
+  <button onclick="turnoff('login-popup-all')">Cancel</button>
  </div>
  </div>
 

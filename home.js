@@ -55,12 +55,15 @@ function getposts(){
 }
 getposts()
 
-function turnoff(){
-    document.getElementById("login-popup").classList.add("hidden")
+
+
+
+function turnoff(id){
+    document.getElementById(id).classList.add("hidden")
     document.body.style.overflow = "scroll"
 }
 
-function turnon(){
-    document.getElementById("login-popup").classList.remove("hidden")
+function turnon(id){
+    document.getElementById(id).classList.remove("hidden")
     document.body.style.overflow = "hidden"
 }
