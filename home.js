@@ -1,3 +1,4 @@
+
 let postsHolder = document.getElementById("postsHolder")
 
 function getposts(){
@@ -55,6 +56,21 @@ function getposts(){
 }
 getposts()
 
+function login(){
+    let username = document.getElementById("input-username").value
+    let password = document.getElementById("input-password").value
+    axios.post("https://tarmeezacademy.com/api/v1/login",{
+            "username" : username,
+            "password" : password
+    })
+    .then((response) => {
+        // console.log(response.data.token);
+        alert("login Success")
+        sessionStorage.token = response.data.token
+    })
+    .catch(err => alert(err.response.data.message))
+}
+
 
 
 
@@ -67,3 +83,4 @@ function turnon(id){
     document.getElementById(id).classList.remove("hidden")
     document.body.style.overflow = "hidden"
 }
+
