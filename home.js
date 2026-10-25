@@ -54,3 +54,13 @@ function getposts(){
     .catch(error => alert(error.response.data.message))
 }
 getposts()
+
+function turnoff(){
+    document.getElementById("login-popup").classList.add("hidden")
+    document.body.style.overflow = "scroll"
+}
+
+function turnon(){
+    document.getElementById("login-popup").classList.remove("hidden")
+    document.body.style.overflow = "hidden"
+}
