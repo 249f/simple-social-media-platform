@@ -7,6 +7,8 @@ function getposts(){
         let posts = response.data.data;
         let render = ``
         for (post of posts) {
+            let tags = post.tags
+            
 
             // check if the post does have an img , if don't it will use a placeholder img
             let pimg = ""
