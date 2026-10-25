@@ -24,6 +24,6 @@ function getposts(){
         postsHolder.innerHTML = render
 
     })
-    .catch(error => alert(error))
+    .catch(error => alert(error.response.data.message))
 }
 getposts()
