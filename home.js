@@ -65,8 +65,11 @@ function login(){
     })
     .then((response) => {
         // console.log(response.data.token);
-        alert("login Success")
+        
         sessionStorage.token = response.data.token
+        turnoff("login-popup-all")
+        let timer = setTimeout(function (){alert("login Success")},1000)
+        
     })
     .catch(err => alert(err.response.data.message))
 }
