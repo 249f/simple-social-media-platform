@@ -6,13 +6,35 @@ function getposts(){
         let posts = response.data.data;
         let render = ``
         for (post of posts) {
+
+            // check if the post does have an img , if don't it will use a placeholder img
+            let pimg = ""
+            if (post.image != null && typeof post.image == 'string'){
+                pimg = post.image
+            }
+            else{
+                pimg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvW2jXorDcuGUNTFpAegqf0X6FfCi7FLF4WpZ4oyrwqA&s=10'
+            }
+             // ##### check if the post does have an img , if don't it will use a placeholder img
+            
+            // check if the user have a pfp img, if not it will use a placeholder
+            let pfpimg = ""
+            if(post.author.profile_image != null && typeof post.author.profile_image == 'string'){
+                pfpimg = post.author.profile_image
+            }
+            else{
+                pfpimg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Av_gvQrAP-pF0SYzLIAD9Rvud-8YYB4mBp93k6SS1Q&s=10'
+            }
+
+            // ###### check if the user have a pfp img, if not it will use a placeholder
+
             render += `
         <div class="post">
             <div class="postHead">
-                <img src="${post.author.profile_image}" alt="pfp image">
+                <img src="${pfpimg}" alt="pfp image">
                 <span>@${post.author.username}</span>
             </div>
-            <img src="${post.image}" alt="post image">
+            <img src="${pimg}" alt="post image">
             <h6>${post.created_at}</h6>
             <h1>${post.title}</h1>
             <p>${post.body}</p>
