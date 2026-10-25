@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 60px;
+    background-color: rgba(33, 37, 41, 0.185) ;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    position: fixed;
+    width: 100%;
+}
+.logo{
+    font-weight: 700;
+    font-size: 3vh;
+    color: orangered;
+}
+.navbar a {
+    text-decoration: none;
+    margin: 0px 20px;
+    color: black;
+
+}
+.selected {
+    color: orangered !important;
+    border-bottom: 3px solid orangered;
+    width: fit-content;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+.nav-btn-holder button {
+    background-color: rgba(255, 255, 255, 0.185);
+    font-size: large;
+    border-radius: 30px;
+    padding: 7px 10px;
+    border: 2px solid rgba(33, 37, 41, 0.185);
+    cursor: pointer;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    margin: 0px 10px;
+}
+.nav-btn-holder button:hover{
+    background-color: rgba(255, 68, 0, 0.753);
+    scale: 1.13;
+    color: white;
+    border-color: transparent;
+    transition: 0.5s;
+    box-shadow: 0px 0px 20px orangered;
+}
