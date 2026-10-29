@@ -71,6 +71,7 @@ function login() {
             localStorage.user = JSON.stringify(response.data.user)
             turnoff("login-popup-all")
             let timer = setTimeout(function () { alert("login Success") }, 1000)
+            checkLogin ()
 
         })
         .catch(err => alert(err.response.data.message))
@@ -87,15 +88,26 @@ function turnon(id) {
 }
 
 function checkLogin (){
-
     let token = localStorage.token
+    let navLoginbtn = document.getElementById("nav-login-btn")
+    let navRegisterbtn = document.getElementById("nav-register-btn")
+    let navBtnHolder = document.getElementById("nav-btn-holder")
 
     if(token == null){
         console.log("not logged in");
     }
     else{
-        console.log("you are logged in and the token is : ", token);
+        navLoginbtn.style.visibility = "hidden"
+        navRegisterbtn.style.visibility = "hidden"
+        navBtnHolder.innerHTML = `
+        <button onClick = "logout()">Sign Out</button>
+        `
     }
 
 
+}
+function logout (){
+    localStorage.removeItem("user")
+    localStorage.removeItem("token")
+    location.reload()
 }
