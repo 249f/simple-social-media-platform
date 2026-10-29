@@ -100,7 +100,7 @@ function checkLogin (){
         navLoginbtn.style.visibility = "hidden"
         navRegisterbtn.style.visibility = "hidden"
         navBtnHolder.innerHTML = `
-        <button onClick = "logout()">Sign Out</button>
+        <button onClick = "logout()" id = "sign-out-btn">Sign Out</button>
         `
     }
 
