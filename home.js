@@ -1,5 +1,5 @@
 let postsHolder = document.getElementById("postsHolder")
-
+checkLogin ()
 function getposts() {
     axios.get("https://tarmeezacademy.com/api/v1/posts?limit=10")
         .then((response) => {
@@ -65,9 +65,10 @@ function login() {
         "password": password
     })
         .then((response) => {
-            // console.log(response.data.token);
+            // console.log(response.data.user);
 
             localStorage.token = response.data.token
+            localStorage.user = JSON.stringify(response.data.user)
             turnoff("login-popup-all")
             let timer = setTimeout(function () { alert("login Success") }, 1000)
 
@@ -83,4 +84,18 @@ function turnoff(id) {
 function turnon(id) {
     document.getElementById(id).classList.remove("hidden")
     document.body.style.overflow = "hidden"
+}
+
+function checkLogin (){
+
+    let token = localStorage.token
+
+    if(token == null){
+        console.log("not logged in");
+    }
+    else{
+        console.log("you are logged in and the token is : ", token);
+    }
+
+
 }
