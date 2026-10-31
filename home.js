@@ -124,7 +124,14 @@ function register() {
     .then((response) => {
         let data = response.data
         console.log(data);
+        localStorage.token = data.token
+        localStorage.user = JSON.stringify(data.user)
         turnoff('register-popup-all')
+        checkLogin()
+        let timer = setTimeout(()=>{
+            alert("user created")
+        },1000)
+        
         
     })
     .catch((err) => {
