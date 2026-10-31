@@ -1,5 +1,5 @@
 let postsHolder = document.getElementById("postsHolder")
-checkLogin ()
+checkLogin()
 function getposts() {
     axios.get("https://tarmeezacademy.com/api/v1/posts?limit=10")
         .then((response) => {
@@ -71,7 +71,7 @@ function login() {
             localStorage.user = JSON.stringify(response.data.user)
             turnoff("login-popup-all")
             let timer = setTimeout(function () { alert("login Success") }, 1000)
-            checkLogin ()
+            checkLogin()
 
         })
         .catch(err => alert(err.response.data.message))
@@ -87,16 +87,16 @@ function turnon(id) {
     document.body.style.overflow = "hidden"
 }
 
-function checkLogin (){
+function checkLogin() {
     let token = localStorage.token
     let navLoginbtn = document.getElementById("nav-login-btn")
     let navRegisterbtn = document.getElementById("nav-register-btn")
     let navBtnHolder = document.getElementById("nav-btn-holder")
 
-    if(token == null){
+    if (token == null) {
         console.log("not logged in");
     }
-    else{
+    else {
         navLoginbtn.style.visibility = "hidden"
         navRegisterbtn.style.visibility = "hidden"
         navBtnHolder.innerHTML = `
@@ -106,8 +106,23 @@ function checkLogin (){
 
 
 }
-function logout (){
+function logout() {
     localStorage.removeItem("user")
     localStorage.removeItem("token")
     location.reload()
+}
+
+function register() {
+    let name = document.getElementById("register-input-name").value
+    let username = document.getElementById("register-input-username").value
+    let password = document.getElementById("register-input-password").value
+    axios.post("https://tarmeezacademy.com/api/v1/register", {
+        "username": username,
+        "password": password,
+        "name": name
+    })
+    .then((response) => {
+        let data = response.data
+        console.log(data);
+    })
 }

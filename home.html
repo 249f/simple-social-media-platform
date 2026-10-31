@@ -27,7 +27,7 @@
 
 <div class="nav-btn-holder" id="nav-btn-holder">
   <button onclick="turnon('login-popup-all')" id="nav-login-btn">Login</button>
-  <button id="nav-register-btn">Register</button>
+  <button id="nav-register-btn" onclick="turnon('register-popup-all')">Register</button>
 </div>
 </div>
 <!-- //navbar -->
@@ -74,7 +74,10 @@
 </div>
 <!-- //posts holder -->
 
+
 <!-- modals -->
+
+<!-- login popup -->
  <div class="login-wrapper hidden" id="login-popup-all">
  <div class="login-popup">
   <h1>Welcome Back</h1>
@@ -84,6 +87,24 @@
   <button onclick="turnoff('login-popup-all')">Cancel</button>
  </div>
  </div>
+ <!-- //login popup -->
+
+<!-- register popup -->
+ <div class="login-wrapper hidden" id="register-popup-all">
+ <div class="login-popup">
+  <h1>Create Account</h1>
+  <input type="text" placeholder="name" id="register-input-name">
+  <input type="text" placeholder="username" id="register-input-username">
+  <input type="password" placeholder="password" id="register-input-password">
+  <button id="login-btn" onclick="register()">Register</button>
+  <button onclick="turnoff('register-popup-all')">Cancel</button>
+ </div>
+ </div>
+ <!-- //register popup -->
+
+
+
+
 
 
 <!-- #### modals -->
