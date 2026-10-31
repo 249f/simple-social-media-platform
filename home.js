@@ -124,5 +124,10 @@ function register() {
     .then((response) => {
         let data = response.data
         console.log(data);
+        turnoff('register-popup-all')
+        
+    })
+    .catch((err) => {
+        alert(err.response.data.message);
     })
 }
