@@ -205,7 +205,7 @@ background-color: orangered;
     box-shadow: 0px 0px 20px orangered;
 }
 .hidden{
-    display: none;
+    display: none !important;
 }
 input:active,input:focus{
     outline: none;
@@ -221,7 +221,7 @@ input{
      box-shadow: 0px 0px 20px red;
      background-color: red;
 }
-#plus-btn{
+.plus-btn{
     background-color: orangered;
     color: white;
     border: none;
@@ -240,7 +240,7 @@ input{
     cursor: pointer;
     transition: 0.5s;
 }
-#plus-btn:hover{
+.plus-btn:hover{
     box-shadow: 0px 0px 30px orangered;
     scale: 1.1;
     transition: 0.5s;
