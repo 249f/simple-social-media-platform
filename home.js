@@ -7,6 +7,7 @@ function getposts() {
             let render = ``
             for (post of posts) {
                 let tags = post.tags
+                // console.log(tags);
 
 
                 // check if the post does have an img , if don't it will use a placeholder img
@@ -100,6 +101,10 @@ function checkLogin() {
         navLoginbtn.style.visibility = "hidden"
         navRegisterbtn.style.visibility = "hidden"
         navBtnHolder.innerHTML = `
+          <div class = "nav-profile">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Av_gvQrAP-pF0SYzLIAD9Rvud-8YYB4mBp93k6SS1Q&s=10" alt="pfp image">
+          <span>@username<span>
+          </div>
         <button onClick = "logout()" id = "sign-out-btn">Sign Out</button>
         `
     }
