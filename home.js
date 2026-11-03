@@ -150,3 +150,9 @@ function register() {
         alert(err.response.data.message);
     })
 }
+
+function createPost (){
+    let createPostWrapper = document.getElementById("create-post-all")
+    createPostWrapper.classList.remove("hidden")
+    document.body.style.overflow = "hidden"
+}
