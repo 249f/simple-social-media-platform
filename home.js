@@ -131,53 +131,53 @@ function register() {
     let pfpimg = document.getElementById("uploaded-pfp-img").files[0]
 
     let formdata = new FormData()
-    formdata.append("username",username)
-    formdata.append("password",password)
-    formdata.append("name",name)
-    formdata.append("image",pfpimg)
+    formdata.append("username", username)
+    formdata.append("password", password)
+    formdata.append("name", name)
+    formdata.append("image", pfpimg)
     axios.post("https://tarmeezacademy.com/api/v1/register", formdata)
-    .then((response) => {
-        let data = response.data
-        console.log(data);
-        localStorage.token = data.token
-        localStorage.user = JSON.stringify(data.user)
-        turnoff('register-popup-all')
-        checkLogin()
-        let timer = setTimeout(()=>{
-            alert("user created")
-        },1000)
-        
-        
-    })
-    .catch((err) => {
-        alert(err.response.data.message);
-    })
+        .then((response) => {
+            let data = response.data
+            console.log(data);
+            localStorage.token = data.token
+            localStorage.user = JSON.stringify(data.user)
+            turnoff('register-popup-all')
+            checkLogin()
+            let timer = setTimeout(() => {
+                alert("user created")
+            }, 1000)
+
+
+        })
+        .catch((err) => {
+            alert(err.response.data.message);
+        })
 }
 
-function createPostClicked (){
+function createPostClicked() {
     let createPostWrapper = document.getElementById("create-post-all")
     createPostWrapper.classList.remove("hidden")
     document.body.style.overflow = "hidden"
 }
-function createPost(){
+function createPost() {
     let titleInput = document.getElementById("title-input").value
     let bodyInput = document.getElementById("body-input").value
     let imgInput = document.getElementById("img-input").files[0]
     let formdata = new FormData()
-    formdata.append("title" , titleInput)
-    formdata.append("body" , bodyInput)
-    formdata.append("image" , imgInput)
-    axios.post("https://tarmeezacademy.com/api/v1/posts",formdata,{
-        headers : {
-            authorization : `Bearer ${localStorage.token}`
+    formdata.append("title", titleInput)
+    formdata.append("body", bodyInput)
+    formdata.append("image", imgInput)
+    axios.post("https://tarmeezacademy.com/api/v1/posts", formdata, {
+        headers: {
+            authorization: `Bearer ${localStorage.token}`
         }
     })
-    .then((response) => {
-        console.log("post created")
-        getposts()
-        turnoff("create-post-all")
-    })
-    .catch((err) => {
-        console.log(err.response.data.message)
-    })
+        .then((response) => {
+            console.log("post created")
+            getposts()
+            turnoff("create-post-all")
+        })
+        .catch((err) => {
+            console.log(err.response.data.message)
+        })
 }
