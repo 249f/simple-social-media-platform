@@ -157,16 +157,22 @@ function createPostClicked (){
     document.body.style.overflow = "hidden"
 }
 function createPost(){
-    axios.post("https://tarmeezacademy.com/api/v1/posts",{
-        title : "hiii",
-        body:"kkkkkkkkk"
-    },{
+    let titleInput = document.getElementById("title-input").value
+    let bodyInput = document.getElementById("body-input").value
+    let imgInput = document.getElementById("img-input").files[0]
+    let formdata = new FormData()
+    formdata.append("title" , titleInput)
+    formdata.append("body" , bodyInput)
+    formdata.append("image" , imgInput)
+    axios.post("https://tarmeezacademy.com/api/v1/posts",formdata,{
         headers : {
             authorization : `Bearer ${localStorage.token}`
         }
     })
     .then((response) => {
-        console.log(response.data.data)
+        console.log("post created")
+        getposts()
+        turnoff("create-post-all")
     })
     .catch((err) => {
         console.log(err.response.data.message)
