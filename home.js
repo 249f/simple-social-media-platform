@@ -157,5 +157,18 @@ function createPostClicked (){
     document.body.style.overflow = "hidden"
 }
 function createPost(){
-    alert("hii")
+    axios.post("https://tarmeezacademy.com/api/v1/posts",{
+        title : "hiii",
+        body:"kkkkkkkkk"
+    },{
+        headers : {
+            authorization : `Bearer ${localStorage.token}`
+        }
+    })
+    .then((response) => {
+        console.log(response.data.data)
+    })
+    .catch((err) => {
+        console.log(err.response.data.message)
+    })
 }
