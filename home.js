@@ -1,7 +1,7 @@
 let postsHolder = document.getElementById("postsHolder")
 checkLogin()
 function getposts() {
-    axios.get("https://tarmeezacademy.com/api/v1/posts?limit=10")
+    axios.get("https://tarmeezacademy.com/api/v1/posts?limit=1")
         .then((response) => {
             let posts = response.data.data;
             let render = ``
@@ -151,8 +151,11 @@ function register() {
     })
 }
 
-function createPost (){
+function createPostClicked (){
     let createPostWrapper = document.getElementById("create-post-all")
     createPostWrapper.classList.remove("hidden")
     document.body.style.overflow = "hidden"
+}
+function createPost(){
+    alert("hii")
 }
