@@ -128,11 +128,14 @@ function register() {
     let name = document.getElementById("register-input-name").value
     let username = document.getElementById("register-input-username").value
     let password = document.getElementById("register-input-password").value
-    axios.post("https://tarmeezacademy.com/api/v1/register", {
-        "username": username,
-        "password": password,
-        "name": name
-    })
+    let pfpimg = document.getElementById("uploaded-pfp-img").files[0]
+
+    let formdata = new FormData()
+    formdata.append("username",username)
+    formdata.append("password",password)
+    formdata.append("name",name)
+    formdata.append("image",pfpimg)
+    axios.post("https://tarmeezacademy.com/api/v1/register", formdata)
     .then((response) => {
         let data = response.data
         console.log(data);
