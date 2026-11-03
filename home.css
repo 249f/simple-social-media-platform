@@ -63,6 +63,8 @@ body{
 }
 .nav-profile img{
     width: 4dvh;
+    height: 4dvh;
+    object-fit: cover;
     border-radius: 75%;
 }
 .nav-profile {

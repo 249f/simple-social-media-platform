@@ -108,7 +108,7 @@ function checkLogin() {
           <div class = "nav-profile">
 
         <!-- add real pfp image later -->
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Av_gvQrAP-pF0SYzLIAD9Rvud-8YYB4mBp93k6SS1Q&s=10" alt="pfp image">
+        <img src="${user.profile_image}" alt="pfp image">
           
         <span>@${user.username}<span>
           </div>
