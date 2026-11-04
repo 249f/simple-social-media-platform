@@ -1,7 +1,8 @@
 let postsHolder = document.getElementById("postsHolder")
+    let currentPage = 1
 checkLogin()
-function getposts() {
-    axios.get("https://tarmeezacademy.com/api/v1/posts?limit=1")
+function getposts(page = 1 , removeOldContent = true) {
+    axios.get(`https://tarmeezacademy.com/api/v1/posts?limit=5&page=${page}`)
         .then((response) => {
             let posts = response.data.data;
             let render = ``
@@ -51,7 +52,10 @@ function getposts() {
         </div>
         `
             }
-            postsHolder.innerHTML = render
+            if (removeOldContent == true){
+                postsHolder.innerHTML = render
+            }
+            
 
         })
         .catch(error => alert(error.response.data.message))
@@ -181,3 +185,13 @@ function createPost() {
             console.log(err.response.data.message)
         })
 }
+
+// infinite Scrolling
+window.addEventListener('scroll',()=>{
+    // console.log(window.scrollY) //scrolled from top
+    // console.log(window.innerHeight) //visible part of screen
+    if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight){
+        currentPage = currentPage+1
+        getposts(currentPage,false)
+    }
+})
