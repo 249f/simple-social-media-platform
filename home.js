@@ -1,38 +1,41 @@
-let postsHolder = document.getElementById("postsHolder")
-    let currentPage = 1
-checkLogin()
-function getposts(page = 1 , removeOldContent = true) {
-    axios.get(`https://tarmeezacademy.com/api/v1/posts?limit=5&page=${page}`)
-        .then((response) => {
-            let posts = response.data.data;
-            let render = ``
-            for (post of posts) {
-                let tags = post.tags
-                // console.log(tags);
+let postsHolder = document.getElementById("postsHolder");
+let currentPage = 1;
+checkLogin();
+function getposts(page = 1, removeOldContent = true) {
+  axios
+    .get(`https://tarmeezacademy.com/api/v1/posts?limit=5&page=${page}`)
+    .then((response) => {
+      let posts = response.data.data;
+      let render = ``;
+      for (post of posts) {
+        let tags = post.tags;
+        // console.log(tags);
 
+        // check if the post does have an img , if don't it will use a placeholder img
+        let pimg = "";
+        if (post.image != null && typeof post.image == "string") {
+          pimg = post.image;
+        } else {
+          pimg =
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvW2jXorDcuGUNTFpAegqf0X6FfCi7FLF4WpZ4oyrwqA&s=10";
+        }
+        // ##### check if the post does have an img , if don't it will use a placeholder img
 
-                // check if the post does have an img , if don't it will use a placeholder img
-                let pimg = ""
-                if (post.image != null && typeof post.image == 'string') {
-                    pimg = post.image
-                }
-                else {
-                    pimg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvW2jXorDcuGUNTFpAegqf0X6FfCi7FLF4WpZ4oyrwqA&s=10'
-                }
-                // ##### check if the post does have an img , if don't it will use a placeholder img
+        // check if the user have a pfp img, if not it will use a placeholder
+        let pfpimg = "";
+        if (
+          post.author.profile_image != null &&
+          typeof post.author.profile_image == "string"
+        ) {
+          pfpimg = post.author.profile_image;
+        } else {
+          pfpimg =
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Av_gvQrAP-pF0SYzLIAD9Rvud-8YYB4mBp93k6SS1Q&s=10";
+        }
 
-                // check if the user have a pfp img, if not it will use a placeholder
-                let pfpimg = ""
-                if (post.author.profile_image != null && typeof post.author.profile_image == 'string') {
-                    pfpimg = post.author.profile_image
-                }
-                else {
-                    pfpimg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Av_gvQrAP-pF0SYzLIAD9Rvud-8YYB4mBp93k6SS1Q&s=10'
-                }
+        // ###### check if the user have a pfp img, if not it will use a placeholder
 
-                // ###### check if the user have a pfp img, if not it will use a placeholder
-
-                render += `
+        render += `
         <div class="post">
             <div class="postHead">
                 <img src="${pfpimg}" alt="pfp image">
@@ -50,65 +53,66 @@ function getposts(page = 1 , removeOldContent = true) {
             </svg>
             ( ${post.comments_count} ) comments</a>
         </div>
-        `
-            }
-            if (removeOldContent == true){
-                postsHolder.innerHTML = render
-            }
-            
-
-        })
-        .catch(error => alert(error.response.data.message))
+        `;
+      }
+      if (removeOldContent == true) {
+        postsHolder.innerHTML = render;
+      } else if (removeOldContent == false) {
+        postsHolder.innerHTML += render;
+      }
+    })
+    .catch((error) => alert(error.response.data.message));
 }
-getposts()
+getposts();
 
 function login() {
-    let username = document.getElementById("input-username").value
-    let password = document.getElementById("input-password").value
-    axios.post("https://tarmeezacademy.com/api/v1/login", {
-        "username": username,
-        "password": password
+  let username = document.getElementById("input-username").value;
+  let password = document.getElementById("input-password").value;
+  axios
+    .post("https://tarmeezacademy.com/api/v1/login", {
+      username: username,
+      password: password,
     })
-        .then((response) => {
-            // console.log(response.data.user);
+    .then((response) => {
+      // console.log(response.data.user);
 
-            localStorage.token = response.data.token
-            localStorage.user = JSON.stringify(response.data.user)
-            turnoff("login-popup-all")
-            let timer = setTimeout(function () { alert("login Success") }, 1000)
-            checkLogin()
-
-        })
-        .catch(err => alert(err.response.data.message))
+      localStorage.token = response.data.token;
+      localStorage.user = JSON.stringify(response.data.user);
+      turnoff("login-popup-all");
+      let timer = setTimeout(function () {
+        alert("login Success");
+      }, 1000);
+      checkLogin();
+    })
+    .catch((err) => alert(err.response.data.message));
 }
 
 function turnoff(id) {
-    document.getElementById(id).classList.add("hidden")
-    document.body.style.overflow = "scroll"
+  document.getElementById(id).classList.add("hidden");
+  document.body.style.overflow = "scroll";
 }
 
 function turnon(id) {
-    document.getElementById(id).classList.remove("hidden")
-    document.body.style.overflow = "hidden"
+  document.getElementById(id).classList.remove("hidden");
+  document.body.style.overflow = "hidden";
 }
 
 function checkLogin() {
-    let token = localStorage.token
-    let navLoginbtn = document.getElementById("nav-login-btn")
-    let navRegisterbtn = document.getElementById("nav-register-btn")
-    let navBtnHolder = document.getElementById("nav-btn-holder")
+  let token = localStorage.token;
+  let navLoginbtn = document.getElementById("nav-login-btn");
+  let navRegisterbtn = document.getElementById("nav-register-btn");
+  let navBtnHolder = document.getElementById("nav-btn-holder");
 
-    if (token == null) {
-        console.log("not logged in");
-    }
-    else {
-        let user = JSON.parse(localStorage.user)
-        // console.log(user);
-        let plusbtn = document.getElementById("plus-btn")
-        plusbtn.classList.remove("hidden")
-        navLoginbtn.style.visibility = "hidden"
-        navRegisterbtn.style.visibility = "hidden"
-        navBtnHolder.innerHTML = `
+  if (token == null) {
+    console.log("not logged in");
+  } else {
+    let user = JSON.parse(localStorage.user);
+    // console.log(user);
+    let plusbtn = document.getElementById("plus-btn");
+    plusbtn.classList.remove("hidden");
+    navLoginbtn.style.visibility = "hidden";
+    navRegisterbtn.style.visibility = "hidden";
+    navBtnHolder.innerHTML = `
           <div class = "nav-profile">
 
         <!-- add real pfp image later -->
@@ -117,81 +121,82 @@ function checkLogin() {
         <span>@${user.username}<span>
           </div>
         <button onClick = "logout()" id = "sign-out-btn">Sign Out</button>
-        `
-    }
-
-
+        `;
+  }
 }
 function logout() {
-    localStorage.removeItem("user")
-    localStorage.removeItem("token")
-    location.reload()
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  location.reload();
 }
 
 function register() {
-    let name = document.getElementById("register-input-name").value
-    let username = document.getElementById("register-input-username").value
-    let password = document.getElementById("register-input-password").value
-    let pfpimg = document.getElementById("uploaded-pfp-img").files[0]
+  let name = document.getElementById("register-input-name").value;
+  let username = document.getElementById("register-input-username").value;
+  let password = document.getElementById("register-input-password").value;
+  let pfpimg = document.getElementById("uploaded-pfp-img").files[0];
 
-    let formdata = new FormData()
-    formdata.append("username", username)
-    formdata.append("password", password)
-    formdata.append("name", name)
-    formdata.append("image", pfpimg)
-    axios.post("https://tarmeezacademy.com/api/v1/register", formdata)
-        .then((response) => {
-            let data = response.data
-            console.log(data);
-            localStorage.token = data.token
-            localStorage.user = JSON.stringify(data.user)
-            turnoff('register-popup-all')
-            checkLogin()
-            let timer = setTimeout(() => {
-                alert("user created")
-            }, 1000)
-
-
-        })
-        .catch((err) => {
-            alert(err.response.data.message);
-        })
+  let formdata = new FormData();
+  formdata.append("username", username);
+  formdata.append("password", password);
+  formdata.append("name", name);
+  formdata.append("image", pfpimg);
+  axios
+    .post("https://tarmeezacademy.com/api/v1/register", formdata)
+    .then((response) => {
+      let data = response.data;
+      console.log(data);
+      localStorage.token = data.token;
+      localStorage.user = JSON.stringify(data.user);
+      turnoff("register-popup-all");
+      checkLogin();
+      let timer = setTimeout(() => {
+        alert("user created");
+      }, 1000);
+    })
+    .catch((err) => {
+      alert(err.response.data.message);
+    });
 }
 
 function createPostClicked() {
-    let createPostWrapper = document.getElementById("create-post-all")
-    createPostWrapper.classList.remove("hidden")
-    document.body.style.overflow = "hidden"
+  let createPostWrapper = document.getElementById("create-post-all");
+  createPostWrapper.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
 }
 function createPost() {
-    let titleInput = document.getElementById("title-input").value
-    let bodyInput = document.getElementById("body-input").value
-    let imgInput = document.getElementById("img-input").files[0]
-    let formdata = new FormData()
-    formdata.append("title", titleInput)
-    formdata.append("body", bodyInput)
-    formdata.append("image", imgInput)
-    axios.post("https://tarmeezacademy.com/api/v1/posts", formdata, {
-        headers: {
-            authorization: `Bearer ${localStorage.token}`
-        }
+  let titleInput = document.getElementById("title-input").value;
+  let bodyInput = document.getElementById("body-input").value;
+  let imgInput = document.getElementById("img-input").files[0];
+  let formdata = new FormData();
+  formdata.append("title", titleInput);
+  formdata.append("body", bodyInput);
+  formdata.append("image", imgInput);
+  axios
+    .post("https://tarmeezacademy.com/api/v1/posts", formdata, {
+      headers: {
+        authorization: `Bearer ${localStorage.token}`,
+      },
     })
-        .then((response) => {
-            console.log("post created")
-            getposts()
-            turnoff("create-post-all")
-        })
-        .catch((err) => {
-            console.log(err.response.data.message)
-        })
+    .then((response) => {
+      console.log("post created");
+      getposts();
+      turnoff("create-post-all");
+    })
+    .catch((err) => {
+      console.log(err.response.data.message);
+    });
 }
 
 // infinite Scrolling
-window.addEventListener('scroll',()=>{
-    // console.log(window.scrollY) //scrolled from top
-    // console.log(window.innerHeight) //visible part of screen
-    if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight){
-        currentPage = currentPage+1
-        getposts(currentPage,false)
-    }
-})
+window.addEventListener("scroll", () => {
+  // console.log(window.scrollY) //scrolled from top
+  // console.log(window.innerHeight) //visible part of screen
+  if (
+    window.scrollY + window.innerHeight >=
+    document.documentElement.scrollHeight
+  ) {
+    currentPage = currentPage + 1;
+    getposts(currentPage, false);
+  }
+});
