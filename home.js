@@ -2,15 +2,14 @@ let postsHolder = document.getElementById("postsHolder");
 let currentPage = 1;
 checkLogin();
 function getposts(page = 1, removeOldContent = true) {
-  axios
-    .get(`https://tarmeezacademy.com/api/v1/posts?limit=5&page=${page}`)
+  axios.get(`https://tarmeezacademy.com/api/v1/posts?limit=5&page=${page}`)
     .then((response) => {
       let posts = response.data.data;
       let render = ``;
+      let lastPage = response.data.meta.last_page;
       for (post of posts) {
         let tags = post.tags;
-        // console.log(tags);
-
+        
         // check if the post does have an img , if don't it will use a placeholder img
         let pimg = "";
         if (post.image != null && typeof post.image == "string") {
@@ -57,7 +56,7 @@ function getposts(page = 1, removeOldContent = true) {
       }
       if (removeOldContent == true) {
         postsHolder.innerHTML = render;
-      } else if (removeOldContent == false) {
+      } else if (removeOldContent == false && page < lastPage) {
         postsHolder.innerHTML += render;
       }
     })
@@ -74,8 +73,6 @@ function login() {
       password: password,
     })
     .then((response) => {
-      // console.log(response.data.user);
-
       localStorage.token = response.data.token;
       localStorage.user = JSON.stringify(response.data.user);
       turnoff("login-popup-all");
@@ -190,8 +187,6 @@ function createPost() {
 
 // infinite Scrolling
 window.addEventListener("scroll", () => {
-  // console.log(window.scrollY) //scrolled from top
-  // console.log(window.innerHeight) //visible part of screen
   if (
     window.scrollY + window.innerHeight >=
     document.documentElement.scrollHeight
