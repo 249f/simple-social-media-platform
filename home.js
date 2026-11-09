@@ -188,7 +188,7 @@ function createPost() {
 // infinite Scrolling
 window.addEventListener("scroll", () => {
   if (
-    window.scrollY + window.innerHeight >=
+    window.scrollY + window.innerHeight  >=
     document.documentElement.scrollHeight
   ) {
     currentPage = currentPage + 1;
