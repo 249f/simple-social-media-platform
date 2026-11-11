@@ -63,20 +63,22 @@ function checkLogin() {
     console.log("not logged in");
   } else {
     let user = JSON.parse(localStorage.user);
-    console.log(user.profile_image)
+    console.log(user.profile_image);
     let plusbtn = document.getElementById("plus-btn");
-    plusbtn.classList.remove("hidden");
-    navLoginbtn.style.visibility = "hidden";
-    navRegisterbtn.style.visibility = "hidden";
-    navBtnHolder.innerHTML = `
-          <div class = "nav-profile">
-
+    if (plusbtn != null) {
+      plusbtn.classList.remove("hidden");
+    }
+    if (navLoginbtn != null && navRegisterbtn != null && navBtnHolder != null) {
+      navLoginbtn.style.visibility = "hidden";
+      navRegisterbtn.style.visibility = "hidden";
+      navBtnHolder.innerHTML = `
+      <div class = "nav-profile">
         <!-- add real pfp image later -->
-        <img src="${user.profile_image}" alt="pfp image">
-          
+        <img src="${user.profile_image}" alt="pfp image"> 
         <span>@${user.username}<span>
-          </div>
+        </div>
         <button onClick = "logout()" id = "sign-out-btn">Sign Out</button>
         `;
+    }
   }
 }
