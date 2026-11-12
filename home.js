@@ -35,7 +35,7 @@ function getposts(page = 1, removeOldContent = true) {
         // ###### check if the user have a pfp img, if not it will use a placeholder
 
         render += `
-        <div class="post">
+        <div class="post" id="${post.id}">
             <div class="postHead">
                 <img src="${pfpimg}" alt="pfp image">
                 <span>@${post.author.username}</span>

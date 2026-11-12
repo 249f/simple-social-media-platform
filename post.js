@@ -4,9 +4,9 @@ function closePage(){
 checkLogin()
 function getPostById (){
     let postHolder = document.getElementById("postsHolder")
-    axios.get(`https://tarmeezacademy.com/api/v1/posts/1`)
+    axios.get(`https://tarmeezacademy.com/api/v1/posts/21943`)
     .then((response) => {
-        console.log(response.data.data)
+        // console.log(response.data.data)
         // console.log(response.data.data.comments)
         let post = response.data.data
         console.log(post.author)
