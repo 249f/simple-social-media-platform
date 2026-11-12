@@ -81,9 +81,4 @@ function checkLogin() {
         `;
     }
   }
-}
-
-function openPostComments(postID){
-location.href = `post.html?postid=${postID}`
 } 
-
