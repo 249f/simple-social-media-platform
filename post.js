@@ -1,6 +1,7 @@
 function closePage() {
   location.href = "home.html";
 }
+
 checkLogin();
 function getPostById() {
   let postHolder = document.getElementById("postsHolder");

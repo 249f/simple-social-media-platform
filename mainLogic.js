@@ -39,7 +39,7 @@ function register() {
     .post("https://tarmeezacademy.com/api/v1/register", formdata)
     .then((response) => {
       let data = response.data;
-      console.log(data);
+      // console.log(data);
       localStorage.token = data.token;
       localStorage.user = JSON.stringify(data.user);
       turnoff("register-popup-all");
@@ -63,7 +63,7 @@ function checkLogin() {
     console.log("not logged in");
   } else {
     let user = JSON.parse(localStorage.user);
-    console.log(user.profile_image);
+    // console.log(user.profile_image);
     let plusbtn = document.getElementById("plus-btn");
     if (plusbtn != null) {
       plusbtn.classList.remove("hidden");
@@ -82,3 +82,8 @@ function checkLogin() {
     }
   }
 }
+
+function openPostComments(postID){
+location.href = `post.html?postid=${postID}`
+} 
+
