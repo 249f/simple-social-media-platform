@@ -4,10 +4,12 @@ function closePage() {
 checkLogin();
 function getPostById() {
   let postHolder = document.getElementById("postsHolder");
-  axios.get(`https://tarmeezacademy.com/api/v1/posts/21936`).then((response) => {
-    // ### fill post ###
-    let post = response.data.data;
-    postHolder.innerHTML = `
+  axios
+    .get(`https://tarmeezacademy.com/api/v1/posts/21936`)
+    .then((response) => {
+      // ### fill post ###
+      let post = response.data.data;
+      postHolder.innerHTML = `
     <!-- post -->
     <div class="post">
       <div class="postHead">
@@ -29,34 +31,32 @@ function getPostById() {
     </div>
     <!-- //post -->
         `;
-    // ### end of fill post ###
+      // ### end of fill post ###
 
-    // ### fill comments ###
-    let commentsHolder = document.getElementById("comments-holder")
-    let comments = response.data.data.comments
-    let content = ``
-    for (comment of comments){
-        let pfpImage = comment.author.profile_image
-        if (typeof(pfpImage) != "string"){
-            pfpImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Av_gvQrAP-pF0SYzLIAD9Rvud-8YYB4mBp93k6SS1Q&s=10"
-        } 
-        // console.log(typeof(post.image))
+      // ### fill comments ###
+      let commentsHolder = document.getElementById("comments-holder");
+      let comments = response.data.data.comments;
+      let content = ``;
+      for (comment of comments) {
+        let pfpImage = comment.author.profile_image;
+        if (typeof pfpImage != "string") {
+          pfpImage =
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Av_gvQrAP-pF0SYzLIAD9Rvud-8YYB4mBp93k6SS1Q&s=10";
+        }
         content += `
     <!-- comment -->  
     <div class="comment-card">
      <div>
-       <img src="${pfpImage}" alt="pfp img">
-      <h4>@${comment.author.username}</h4>
+        <img src="${pfpImage}" alt="pfp img">
+        <h4>@${comment.author.username}</h4>
      </div>
       <p>${comment.body}</p>
     </div>
     <!-- //comment -->
-        `
-    }
-    commentsHolder.innerHTML = content
-
-
-    // ### end of fill comments ###
-  });
+        `;
+      }
+      commentsHolder.innerHTML = content;
+      // ### end of fill comments ###
+    });
 }
 getPostById();
