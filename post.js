@@ -4,9 +4,11 @@ function closePage() {
 
 checkLogin();
 function getPostById() {
+  let extractedPostId = new URLSearchParams(location.search);
+  let id = extractedPostId.get("postid");
   let postHolder = document.getElementById("postsHolder");
   axios
-    .get(`https://tarmeezacademy.com/api/v1/posts/21936`)
+    .get(`https://tarmeezacademy.com/api/v1/posts/${id}`)
     .then((response) => {
       // ### fill post ###
       let post = response.data.data;
