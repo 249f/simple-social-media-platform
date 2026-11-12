@@ -124,3 +124,22 @@ body{
     display: inline;
    
 }
+#comment-input {
+    width: 50dvw;
+    background-color: rgb(247, 0, 0);
+    display: flex;
+    justify-content: center;
+}
+#comment-input-wrapper{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+}
+#comment-input input{
+    width: 80%;
+}
+#comment-input button{
+    width: 20%;
+}
